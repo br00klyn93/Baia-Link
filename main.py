@@ -37,7 +37,7 @@ def get_spotify():
     offset = offset + len(response['items'])
     print("offset: ", offset, "/", response['total'])
     
-    display(song_ids)
+    return(display(song_ids))
 
 
 def display(songids):
