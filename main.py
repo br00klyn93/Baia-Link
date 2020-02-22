@@ -12,7 +12,6 @@ sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
 playlists = sp.user_playlists('digitalageb')
 
 pl_id = 'spotify:playlist:02ffdMW3wCP6CWLXtKh7vb'
-offset = 0
 
 song_ids = []
 
@@ -25,7 +24,7 @@ def main():
 
 def get_spotify():
     while True:
-        response = sp.playlist_tracks(pl_id,offset=offset,fields='items.track.name,total')
+        response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,total')
         for i in response['items']:
             ye = str(i)
             ye = ye[23:-3]
