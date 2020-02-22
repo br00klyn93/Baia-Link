@@ -1,0 +1,4 @@
+Flask
+spotipy
+spotipy.oauth2
+gunicorn
