@@ -38,9 +38,6 @@ def get_spotify():
     offset = offset + len(response['items'])
     print("offset: ", offset, "/", response['total'])
 
-    if len(response['items']) == 0:
-        break
-
 
 def display():
     return("\n".join(song_ids))
