@@ -40,7 +40,9 @@ def get_spotify():
 
 
 def display():
-    return("/".join(song_ids))
+    to_ret = "/".join(song_ids)
+    song_ids = []
+    return(to_ret)
 
 
 if __name__ == "__main__":
