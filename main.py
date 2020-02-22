@@ -19,7 +19,7 @@ song_ids = []
 @app.route('/')
 def main():
     get_spotify()
-    display()
+    return(display())
 
 # On post request => get_spotify() then display()
 
