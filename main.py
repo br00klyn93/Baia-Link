@@ -23,23 +23,23 @@ def main():
 # On post request => get_spotify() then display()
 
 def get_spotify():
-    while True:
-        response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,total')
-        for i in response['items']:
-            ye = str(i)
-            ye = ye[23:-3]
+    response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,total')
+    for i in response['items']:
+        ye = str(i)
+        ye = ye[:-3]
 
-            if ye == '':
-                continue
-            else:
-                song_ids.append(ye)
-                print(ye)
-        offset=0
-        offset = offset + len(response['items'])
-        print("offset: ", offset, "/", response['total'])
+        if ye == '':
+            continue
+        else:
+            song_ids.append(ye)
+            print(ye)
+            
+    offset=0
+    offset = offset + len(response['items'])
+    print("offset: ", offset, "/", response['total'])
 
-        if len(response['items']) == 0:
-            break
+    if len(response['items']) == 0:
+        break
 
 
 def display():
