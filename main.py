@@ -13,16 +13,15 @@ playlists = sp.user_playlists('digitalageb')
 
 pl_id = 'spotify:playlist:02ffdMW3wCP6CWLXtKh7vb'
 
-song_ids = []
-
 @app.route('/')
 def main():
-    get_spotify()
-    return(display())
+    return(get_spotify())
+    
 
 # On post request => get_spotify() then display()
 
 def get_spotify():
+    song_ids = []
     response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,total')
     for i in response['items']:
         ye = str(i)
@@ -37,12 +36,12 @@ def get_spotify():
     offset=0
     offset = offset + len(response['items'])
     print("offset: ", offset, "/", response['total'])
+    
+    display(song_ids)
 
 
-def display():
-    to_ret = "/".join(song_ids)
-    song_ids = []
-    return(to_ret)
+def display(songids):
+    return("/".join(songids))
 
 
 if __name__ == "__main__":
