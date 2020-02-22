@@ -26,7 +26,7 @@ def get_spotify():
     response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,total')
     for i in response['items']:
         ye = str(i)
-        ye = ye[:-3]
+        ye = ye[20:-3]
 
         if ye == '':
             continue
