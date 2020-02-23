@@ -29,9 +29,9 @@ def get_spotify():
     response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,items.track.artists,total')
     for i in response['items']:
         ye = str(i)
-        name = ye[23:].partition("'")[0]
-        artist = ye[23:].partition("name")[2]
-        artist = artist[5:].partition("'")[0]
+        name = ye[22:].partition("'")[0]
+        artist = ye[22:].partition("name")[2]
+        artist = artist[4:].partition("'")[0]
 
         if ye == '':
             continue
