@@ -22,22 +22,29 @@ def main():
 
 def get_spotify():
     song_ids = []
-    response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,total')
+    artist_names = []
+    
+    we_out = []
+    
+    response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,items.track.artists,total')
     for i in response['items']:
         ye = str(i)
-        ye = ye[20:-3]
+        name = ye[20:].partition("'")[0]
+        artist = ye[20:].partition("name")[2]
+        artist = artist[2:].partition("'")[0]
 
         if ye == '':
             continue
         else:
-            song_ids.append(ye)
-            print(ye)
-            
-    offset=0
-    offset = offset + len(response['items'])
-    print("offset: ", offset, "/", response['total'])
+            song_ids.append(name)
+            artist_names.append(artist)
+
+    num = 0
+    for i in song_ids:
+        we_out.append(i+'-'+artist_names[num])
+        num+=1
     
-    return(display(song_ids))
+    return(display(we_out))
 
 
 def display(songids):
