@@ -29,6 +29,7 @@ def get_spotify():
     response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,items.track.artists,total')
     for i in response['items']:
         ye = str(i)
+        print("ye: ", ye)
         name = ye[10:].partition("'")[0]
         artist = ye[22:].partition("name")[2]
         artist = artist[4:].partition("'")[0]
