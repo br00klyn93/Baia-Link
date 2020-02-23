@@ -30,7 +30,8 @@ def get_spotify():
     for i in response['items']:
         ye = str(i)
         print("ye: ", ye)
-        name = ye[221:].partition("name")[2]
+        name = ye.partition("type")[2]
+        name = name.partition("name")[2]
         name = name[4:-3]
         artist = ye[22:].partition("name")[2]
         artist = artist[4:].partition("'")[0]
