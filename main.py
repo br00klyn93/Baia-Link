@@ -32,7 +32,11 @@ def get_spotify():
         print("ye: ", ye.partition("type")[2].partition("name")[2])
         name = ye[10:].partition("type")[2]
         name = name.partition("name")[2]
-        name = name[4:-3]
+        if len(name) > 30:
+            name = name.partition("name")[2]
+            name = name[4:-3]
+        else:
+            name = name[4:-3]
         
         artist = ye[22:].partition("name")[2]
         artist = artist[4:].partition("'")[0]
