@@ -32,7 +32,7 @@ def get_spotify():
         print("ye: ", ye.partition("type")[2].partition("name")[2])
         name = ye[10:].partition("type")[2]
         name = name.partition("name")[2]
-        if name.partition("name")[2] != '':
+        if name.find("name") != -1:
             name = name.partition("name")[2]
             name = name[4:-3]
         else:
