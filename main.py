@@ -35,6 +35,9 @@ def get_spotify():
         if name.find("name") != -1:
             name = name.partition("name")[2]
             name = name[4:-3]
+            if name.find("name") != -1:
+                name = name.partition("name")[2]
+                name = name[4:-3]   
         else:
             name = name[4:-3]
         
