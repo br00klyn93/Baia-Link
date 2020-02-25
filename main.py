@@ -52,7 +52,7 @@ def get_spotify():
 
     num = 0
     for i in song_ids:
-        we_out.append(i+'-'+artist_names[num])
+        we_out.append(i+' '+artist_names[num])
         num+=1
     
     return(display(we_out))
