@@ -19,6 +19,8 @@ playlists = sp.user_playlists('digitalageb')
 
 pl_id = 'spotify:playlist:7lNJwcxRrS16RwyGhHfxLF'
 
+itunes_identifiers = []
+
 @app.route('/')
 def main():
     return(get_spotify())
@@ -52,7 +54,7 @@ def convert_itunes(title, artist):
         # We don't do any fancy error handling.. Just return None if something went wrong
         return None
 
-itunes_identifiers = []
+
 
 def get_spotify():
     song_ids = []
@@ -94,6 +96,7 @@ def get_spotify():
     return(finish(we_out))
 
 def finish(songids):
+    print(itunes_identifiers)
     return("/".join(songids) + "-".join(itunes_identifiers))
 
 
