@@ -5,6 +5,12 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from pprint import pprint
 
+# For the indentifier retriever
+import struct
+import urllib.parse, urllib.request
+import json
+
+
 app = Flask(__name__)
 
 sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
@@ -19,6 +25,34 @@ def main():
 
 
 # On post request => get_spotify() then display()
+def convert_itunes(title, artist):
+    headers = {
+        "X-Apple-Store-Front" : "143446-10,32 ab:rSwnYxS0 t:music2",
+        "X-Apple-Tz" : "7200"
+    }
+    url = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/search?clientApplication=MusicPlayer&term=" + urllib.parse.quote(title)
+    request = urllib.request.Request(url, None, headers)
+
+    try:
+        response = urllib.request.urlopen(request)
+        data = json.loads(response.read().decode('utf-8'))
+        songs = [result for result in data["storePlatformData"]["lockup"]["results"].values() if result["kind"] == "song"]
+
+        # Attempt to match by title & artist
+        for song in songs:
+            if song["name"].lower() == title.lower() and (song["artistName"].lower() in artist.lower() or artist.lower() in song["artistName"].lower()):
+                return song["id"]
+
+        # Attempt to match by title if we didn't get a title & artist match
+        for song in songs:
+            if song["name"].lower() == title.lower():
+                return song["id"]
+
+    except:
+        # We don't do any fancy error handling.. Just return None if something went wrong
+        return None
+
+itunes_identifiers = []
 
 def get_spotify():
     song_ids = []
@@ -55,11 +89,11 @@ def get_spotify():
         we_out.append(i+' '+artist_names[num])
         num+=1
 
-    return(display(we_out))
+    convert_itunes(song_ids,artist_names)
+    return(finish(we_out))
 
-
-def display(songids):
-    return("/".join(songids))
+def finish(songids):
+    return("/".join(songids) + "-".join(itunes_identifiers))
 
 
 if __name__ == "__main__":
