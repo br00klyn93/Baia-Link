@@ -89,7 +89,7 @@ def get_spotify():
     num = 0
     for i in song_ids:
         we_out.append(i+' '+artist_names[num])
-        convert_itunes(i,artist_names[num])
+        itunes_identifiers.append(convert_itunes(i,artist_names[num]))
         num+=1
 
 
