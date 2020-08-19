@@ -11,21 +11,21 @@ sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
 
 playlists = sp.user_playlists('digitalageb')
 
-pl_id = 'spotify:playlist:02ffdMW3wCP6CWLXtKh7vb'
+pl_id = 'spotify:playlist:7lNJwcxRrS16RwyGhHfxLF'
 
 @app.route('/')
 def main():
     return(get_spotify())
-    
+
 
 # On post request => get_spotify() then display()
 
 def get_spotify():
     song_ids = []
     artist_names = []
-    
+
     we_out = []
-    
+
     response = sp.playlist_tracks(pl_id,offset=0,fields='items.track.name,items.track.artists,total')
     for i in response['items']:
         ye = str(i)
@@ -37,10 +37,10 @@ def get_spotify():
             name = name[4:-3]
             if name.find("name") != -1:
                 name = name.partition("name")[2]
-                name = name[4:-3]   
+                name = name[4:-3]
         else:
             name = name[4:-3]
-        
+
         artist = ye[22:].partition("name")[2]
         artist = artist[4:].partition("'")[0]
 
@@ -54,7 +54,7 @@ def get_spotify():
     for i in song_ids:
         we_out.append(i+' '+artist_names[num])
         num+=1
-    
+
     return(display(we_out))
 
 
