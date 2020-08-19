@@ -17,7 +17,7 @@ sp = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
 
 playlists = sp.user_playlists('digitalageb')
 
-pl_id = 'spotify:playlist:7lNJwcxRrS16RwyGhHfxLF'
+pl_id = 'spotify:playlist:02ffdMW3wCP6CWLXtKh7vb'
 
 itunes_identifiers = []
 
@@ -96,8 +96,9 @@ def get_spotify():
     return(finish(we_out))
 
 def finish(songids):
-    print(itunes_identifiers)
-    return("/".join(songids) + "-".join(itunes_identifiers))
+    # print(itunes_identifiers)
+    # return("/".join(songids))
+    return("-".join(itunes_identifiers))
 
 
 if __name__ == "__main__":
